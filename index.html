@@ -11,7 +11,8 @@
 	<!-- <embed src="t.pdf" width="700px" height="800px" alt="pdf"> -->
 
 	<p><b>Put Some Input</b></p>
-	<textarea id="inputText" onkeyup="showHint(this.value)" onpaste="showHint(this.value)"></textarea>
+	<!-- <textarea id="inputText" onkeyup="showHint(this.value)" onpaste="showHint(this.value)"></textarea> -->
+	<textarea id="inputText" onkeyup="showHint(this.value)"></textarea>
 	<input type="file" id="textUpload" onchange="showText(this)">
 	<p>Suggestions: <br><span id="txtHint"></span></p>
 	
@@ -29,9 +30,11 @@
 
 		para = str;
 		
-		pattern = /[^\s\W]+/g;
+		// pattern = /[^\s\W]+/g;
+		//pattern = /[^\s!&?$*.,;|]+/g;
+		pattern = /[^\s,;?!:.|।-]+/g;
 		list = para.match(pattern);
-		//console.log(list);
+		//console.log(list.length);
 
 		var m = spellChecker(list);
 		showResult(m);
@@ -51,7 +54,7 @@
 		reader.onload = function() {
 			
 			para = reader.result;
-			pattern = /[^\s\W]+/g;
+			pattern = /[^\s,;?!:.|।-]+/g;
 			list = para.match(pattern);
 
 			var m1 = list.join(" ");
@@ -67,14 +70,15 @@
 
 		for(var i=0;i<list.length;i++)
 		{
-			if(spellMap[0][list[i].toLowerCase()] == undefined)
+			if(banglaSpell[0][list[i].toLowerCase()] == undefined)
 			{
-				list[i] += " - right";
+				//list[i] += " - right";
+				list[i] += " - সঠিক";
 			}
 			else
 			{
 				// list[i] += " - wrong";
-				list[i] += " - "+spellMap[0][list[i].toLowerCase()];
+				list[i] += " - "+banglaSpell[0][list[i].toLowerCase()];
 				//spellMap[0][list[i]]
 			}
 		}
