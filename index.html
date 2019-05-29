@@ -13,32 +13,33 @@
 	<p><b>Put Some Input</b></p>
 	<textarea id="inputText" onkeyup="showHint(this.value)" onpaste="showHint(this.value)"></textarea>
 	<input type="file" id="textUpload" onchange="showText(this)">
-	<p>Suggestions: <span id="txtHint"></span></p>
+	<p>Suggestions: <br><span id="txtHint"></span></p>
 	
 </body>
 
 <!-- <script src="lib/main.js"></script> -->
 
+<script type="text/javascript" src="dataset/spell.json"></script>
+
 <script type="text/javascript">
 
 	function showHint(str) 
 	{
+	    //document.getElementById("txtHint").innerHTML = str;
 
-		console.log("hello");
-	    // if (str.length == 0) { 
-	    //     document.getElementById("txtHint").innerHTML = "";
-	    //     return;
-	    // } else {
-	    //     var xmlhttp = new XMLHttpRequest();
-	    //     xmlhttp.onreadystatechange = function() {
-	    //         if (this.readyState == 4 && this.status == 200) {
-	    //             document.getElementById("txtHint").innerHTML = this.responseText;
-	    //         }
-	    //     }
-	    //     xmlhttp.open("GET", "gethint.php?q="+str, true);
-	    //     xmlhttp.send();
-	    // }
+		para = str;
+		
+		pattern = /[^\s\W]+/g;
+		list = para.match(pattern);
+		//console.log(list);
 
+		var m = spellChecker(list);
+		showResult(m);
+		
+	}
+
+	function showResult(str) 
+	{
 	    document.getElementById("txtHint").innerHTML = str;
 	}
 
@@ -46,22 +47,38 @@
 	{	
 		
 		let reader = new FileReader();
-
 		reader.readAsText(file.files[0]);
-
 		reader.onload = function() {
 			
 			para = reader.result;
 			pattern = /[^\s\W]+/g;
 			list = para.match(pattern);
 
-			var mainText = list.join(" ");
-			//console.log(mainText);
+			var m1 = list.join(" ");
+			var m2 = spellChecker(list);
 
-			document.getElementById("inputText").innerHTML = mainText;
-			showHint(mainText);
+			document.getElementById("inputText").innerHTML = m1;
+			showResult(m2);
+		}	
+	}
+
+	function spellChecker(list)
+	{	
+
+		for(var i=0;i<list.length;i++)
+		{
+			if(spellMap[0][list[i].toLowerCase()] == undefined)
+			{
+				list[i] += " - right";
+			}
+			else
+			{
+				// list[i] += " - wrong";
+				list[i] += " - "+spellMap[0][list[i].toLowerCase()];
+				//spellMap[0][list[i]]
+			}
 		}
-		
+		return list.join("<br/>");
 	}
 
 
