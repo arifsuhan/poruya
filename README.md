@@ -15,6 +15,8 @@ https://github.com/antimatter15/ocrad.js
 
 http://usefulangle.com/post/20/pdfjs-tutorial-1-preview-pdf-during-upload-wih-next-prev-buttons
 
+https://javascript.info/events-change-input
+
 -->
 
 ```

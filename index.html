@@ -2,15 +2,70 @@
 <html>
 <head>
 	<title>Poruya</title>
+	<link rel="stylesheet" type="text/css" href="lib/style.css">
 </head>
 <body>
 
-	<input type="file" id="fileToUpload">
+	<!-- <input type="file" id="fileToUpload"> -->
 	<!-- <input type="file" id="fileToUpload" accept="application/pdf"> -->
 	<!-- <embed src="t.pdf" width="700px" height="800px" alt="pdf"> -->
 
+	<p><b>Put Some Input</b></p>
+	<textarea id="inputText" onkeyup="showHint(this.value)" onpaste="showHint(this.value)"></textarea>
+	<input type="file" id="textUpload" onchange="showText(this)">
+	<p>Suggestions: <span id="txtHint"></span></p>
+	
 </body>
 
-<script src="lib/main.js"></script>
+<!-- <script src="lib/main.js"></script> -->
+
+<script type="text/javascript">
+
+	function showHint(str) 
+	{
+
+		console.log("hello");
+	    // if (str.length == 0) { 
+	    //     document.getElementById("txtHint").innerHTML = "";
+	    //     return;
+	    // } else {
+	    //     var xmlhttp = new XMLHttpRequest();
+	    //     xmlhttp.onreadystatechange = function() {
+	    //         if (this.readyState == 4 && this.status == 200) {
+	    //             document.getElementById("txtHint").innerHTML = this.responseText;
+	    //         }
+	    //     }
+	    //     xmlhttp.open("GET", "gethint.php?q="+str, true);
+	    //     xmlhttp.send();
+	    // }
+
+	    document.getElementById("txtHint").innerHTML = str;
+	}
+
+	function showText(file)
+	{	
+		
+		let reader = new FileReader();
+
+		reader.readAsText(file.files[0]);
+
+		reader.onload = function() {
+			
+			para = reader.result;
+			pattern = /[^\s\W]+/g;
+			list = para.match(pattern);
+
+			var mainText = list.join(" ");
+			//console.log(mainText);
+
+			document.getElementById("inputText").innerHTML = mainText;
+			showHint(mainText);
+		}
+		
+	}
+
+
+
+</script>
 
 </html>
