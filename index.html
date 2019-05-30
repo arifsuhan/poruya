@@ -4,96 +4,67 @@
 	<title>Poruya</title>
 	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/topuhit/Font-Bangla@1.0.3/1.0.0/font-bangla.css">
 
 	<link rel="stylesheet" type="text/css" href="lib/style.css">
 </head>
 <body>
 
-	<!-- <input type="file" id="fileToUpload"> -->
 	<!-- <input type="file" id="fileToUpload" accept="application/pdf"> -->
 	<!-- <embed src="t.pdf" width="700px" height="800px" alt="pdf"> -->
 
 	<p class="display-4">
-		<i class="fb-bangladesh-map"></i>
-		<b>বানান যাচাই করুন</b>
+		<b>Reading Time Estimator</b>
 	</p>
-	<!-- <textarea id="inputText" onkeyup="showHint(this.value)" onpaste="showHint(this.value)"></textarea> -->
+
 	<textarea id="inputText" class="form-control" onkeyup="showHint(this.value)"></textarea>
 	<br>
 	<label class="btn btn-primary">
-	    ফাইল আপলোড <input type="file" id="textUpload" onchange="showText(this)" hidden>
+	    Upload <input type="file" id="textUpload" onchange="showText(this)" hidden>
 	</label>
 	
-	<p><b>ফলাফল:</b> <br><span id="txtHint"></span></p>
+	<p><b>Result:</b> <br><span id="txtHint"></span></p>
 	
 </body>
 
 <!-- <script src="lib/main.js"></script> -->
 
-<script type="text/javascript" src="dataset/spell.json"></script>
-
 <script type="text/javascript">
-
-	function showHint(str) 
-	{
-	    //document.getElementById("txtHint").innerHTML = str;
-
-		para = str;
-		
-		// pattern = /[^\s\W]+/g;
-		//pattern = /[^\s!&?$*.,;|]+/g;
-		pattern = /[^\s,;?!:.|।-]+/g;
-		list = para.match(pattern);
-		//console.log(list.length);
-
-		var m = spellChecker(list);
-		showResult(m);
-		
-	}
 
 	function showResult(str) 
 	{
-	    document.getElementById("txtHint").innerHTML = str;
+	    document.getElementById("txtHint").innerHTML = "You will need "+str+" minutes!";
+	}
+
+	function showHint(str) 
+	{
+		let speed_test  = wordCount(str);
+		showResult(speed_test);
 	}
 
 	function showText(file)
 	{	
-		
 		let reader = new FileReader();
 		reader.readAsText(file.files[0]);
 		reader.onload = function() {
-			
-			para = reader.result;
-			pattern = /[^\s,;?!:.|।-]+/g;
-			list = para.match(pattern);
-
-			var m1 = list.join(" ");
-			var m2 = spellChecker(list);
-
-			document.getElementById("inputText").innerHTML = para;
-			showResult(m2);
+			let speed_test  = wordCount(reader.result);
+			document.getElementById("inputText").innerHTML = reader.result;
+			showResult(speed_test);
 		}	
 	}
 
-	function spellChecker(list)
+	function wordCount(para)
 	{	
+		//pattern = /\b\s+(?!$)/;
+		//pattern = /[^\s\W]+/g;
+		//pattern = /[^\s!&?$*.,;|]+/g;
+		pattern = /[^\s,;?!:.|।-]+/g;
+		
+		list = para.match(pattern);
 
-		for(var i=0;i<list.length;i++)
-		{
-			if(banglaSpell[0][list[i].toLowerCase()] == undefined)
-			{
-				//list[i] += " - right";
-				list[i] += " - সঠিক";
-			}
-			else
-			{
-				// list[i] += " - wrong";
-				list[i] += " - "+banglaSpell[0][list[i].toLowerCase()];
-				//spellMap[0][list[i]]
-			}
-		}
-		return list.join("<br/>");
+		let wpm = 200;
+    	let speed_test = Math.round(list.length / wpm);
+
+		return speed_test;
 	}
 
 
