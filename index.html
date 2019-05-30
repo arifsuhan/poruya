@@ -16,16 +16,16 @@
 
 	<p class="display-4">
 		<i class="fb-bangladesh-map"></i>
-		<b>Put Some Input</b>
+		<b>বানান যাচাই করুন</b>
 	</p>
 	<!-- <textarea id="inputText" onkeyup="showHint(this.value)" onpaste="showHint(this.value)"></textarea> -->
 	<textarea id="inputText" class="form-control" onkeyup="showHint(this.value)"></textarea>
 	<br>
 	<label class="btn btn-primary">
-	    Browse <input type="file" id="textUpload" onchange="showText(this)" hidden>
+	    ফাইল আপলোড <input type="file" id="textUpload" onchange="showText(this)" hidden>
 	</label>
 	
-	<p>Suggestions: <br><span id="txtHint"></span></p>
+	<p><b>ফলাফল:</b> <br><span id="txtHint"></span></p>
 	
 </body>
 
@@ -71,7 +71,7 @@
 			var m1 = list.join(" ");
 			var m2 = spellChecker(list);
 
-			document.getElementById("inputText").innerHTML = m1;
+			document.getElementById("inputText").innerHTML = para;
 			showResult(m2);
 		}	
 	}
