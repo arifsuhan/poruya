@@ -29,75 +29,7 @@
 	
 </body>
 
-<!-- <script src="lib/main.js"></script> -->
-
-<script type="text/javascript" src="dataset/spell.json"></script>
-
-<script type="text/javascript">
-
-	function showHint(str) 
-	{
-	    //document.getElementById("txtHint").innerHTML = str;
-
-		para = str;
-		
-		// pattern = /[^\s\W]+/g;
-		//pattern = /[^\s!&?$*.,;|]+/g;
-		pattern = /[^\s,;?!:.|।-]+/g;
-		list = para.match(pattern);
-		//console.log(list.length);
-
-		var m = spellChecker(list);
-		showResult(m);
-		
-	}
-
-	function showResult(str) 
-	{
-	    document.getElementById("txtHint").innerHTML = str;
-	}
-
-	function showText(file)
-	{	
-		
-		let reader = new FileReader();
-		reader.readAsText(file.files[0]);
-		reader.onload = function() {
-			
-			para = reader.result;
-			pattern = /[^\s,;?!:.|।-]+/g;
-			list = para.match(pattern);
-
-			var m1 = list.join(" ");
-			var m2 = spellChecker(list);
-
-			document.getElementById("inputText").innerHTML = para;
-			showResult(m2);
-		}	
-	}
-
-	function spellChecker(list)
-	{	
-
-		for(var i=0;i<list.length;i++)
-		{
-			if(banglaSpell[0][list[i].toLowerCase()] == undefined)
-			{
-				//list[i] += " - right";
-				list[i] += " - সঠিক";
-			}
-			else
-			{
-				// list[i] += " - wrong";
-				list[i] += " - "+banglaSpell[0][list[i].toLowerCase()];
-				//spellMap[0][list[i]]
-			}
-		}
-		return list.join("<br/>");
-	}
-
-
-
-</script>
+<script src="dataset/spell.json"></script>
+<script src="lib/main.js"></script>
 
 </html>
