@@ -2,6 +2,10 @@
 <html>
 <head>
 	<title>Poruya</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/topuhit/Font-Bangla@1.0.3/1.0.0/font-bangla.css">
+
 	<link rel="stylesheet" type="text/css" href="lib/style.css">
 </head>
 <body>
@@ -10,10 +14,17 @@
 	<!-- <input type="file" id="fileToUpload" accept="application/pdf"> -->
 	<!-- <embed src="t.pdf" width="700px" height="800px" alt="pdf"> -->
 
-	<p><b>Put Some Input</b></p>
+	<p class="display-4">
+		<i class="fb-bangladesh-map"></i>
+		<b>Put Some Input</b>
+	</p>
 	<!-- <textarea id="inputText" onkeyup="showHint(this.value)" onpaste="showHint(this.value)"></textarea> -->
-	<textarea id="inputText" onkeyup="showHint(this.value)"></textarea>
-	<input type="file" id="textUpload" onchange="showText(this)">
+	<textarea id="inputText" class="form-control" onkeyup="showHint(this.value)"></textarea>
+	<br>
+	<label class="btn btn-primary">
+	    Browse <input type="file" id="textUpload" onchange="showText(this)" hidden>
+	</label>
+	
 	<p>Suggestions: <br><span id="txtHint"></span></p>
 	
 </body>
