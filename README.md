@@ -4,6 +4,10 @@ Poruya(পড়ুয়া) - A helping tool for Bookworm
 ### Target
 
 <!-- 
+git branch -a //see all branches
+git checkout [branch name]
+
+
 based on uploaded file,given link or any pasted text
 1. Doc,Pdf or any particular text based word counting) 
 
