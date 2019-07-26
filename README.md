@@ -21,6 +21,9 @@ http://usefulangle.com/post/20/pdfjs-tutorial-1-preview-pdf-during-upload-wih-ne
 
 https://javascript.info/events-change-input
 
+mac full screenshort cut
+Shift+CMD+F | ctrl+CMD+F
+
 -->
 
 ```
